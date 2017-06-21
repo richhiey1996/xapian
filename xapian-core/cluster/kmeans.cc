@@ -28,7 +28,6 @@
 #include "omassert.h"
 
 #include <limits>
-#include <set>
 #include <unordered_map>
 #include <vector>
 
@@ -58,6 +57,13 @@ KMeans::get_description() const
 }
 
 void
+KMeans::set_stopper(const Stopper *stop)
+{
+    LOGCALL_VOID(API, "KMeans::set_stopper", stop);
+    tlg.set_stopper(stop);
+}
+
+void
 KMeans::initialise_clusters(ClusterSet &cset, unsigned int num_of_points)
 {
     LOGCALL_VOID(API, "KMeans::initialize_clusters", cset);
@@ -71,7 +77,7 @@ void
 KMeans::initialise_points(const MSet &source)
 {
     LOGCALL_VOID(API, "KMeans::initialize_points", source);
-    TermListGroup tlg(source);
+    tlg.construct_tlg(source);
     for (MSetIterator it = source.begin(); it != source.end(); ++it)
 	points.push_back(Point(tlg, it.get_document()));
 }

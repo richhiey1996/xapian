@@ -68,7 +68,7 @@ TermListGroup::TermListGroup(const MSet &docs)
 void
 TermListGroup::construct_tlg(const MSet &docs)
 {
-    LOGCALL_VOID(API, "TermListGroup::set_mset", docs);
+    LOGCALL_VOID(API, "TermListGroup::construct_tlg", docs);
     for (MSetIterator it = docs.begin(); it != docs.end(); ++it)
 	add_document(it.get_document());
     num_of_documents = docs.size();
